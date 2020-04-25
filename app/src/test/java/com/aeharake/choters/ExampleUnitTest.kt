@@ -1,5 +1,6 @@
 package com.aeharake.choters
 
+import com.aeharake.choters.mocker.UsersGenerator
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -13,5 +14,10 @@ class ExampleUnitTest {
   @Test
   fun addition_isCorrect() {
     assertEquals(4, 2 + 2)
+  }
+
+  @Test
+  fun test_names_size(){
+    assertEquals(200, UsersGenerator.getRandomFullNames().size)
   }
 }
