@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">choters</string>
+    <string name="hint_send_text_view">Type a message</string>
 </resources>
