@@ -3,7 +3,15 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-
     <color name="dark_gray">#737373</color>
-    <color name="light_gray">#DFDFDF</color>
+    <color name="light_gray">#B1B1B1</color>
+
+    <color name="lighter_gray">#DFDFDF</color>
+
+    <color name="recipient_balloon">@color/light_gray</color>
+    <color name="sender_balloon">@color/light_blue</color>
+
+    <color name="cyan">#00FFFF</color>
+    <color name="light_blue">#2196F3</color>
+
 </resources>
