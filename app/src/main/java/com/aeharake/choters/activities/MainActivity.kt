@@ -1,4 +1,4 @@
-package com.aeharake.choters
+package com.aeharake.choters.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,8 +7,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aeharake.choters.R
+import com.aeharake.choters.viewmodels.UsersViewModel
 import com.aeharake.choters.adapters.UsersAdapter
-import com.aeharake.choters.room.entities.User
 import com.aeharake.choters.room.entities.UserMessage
 
 

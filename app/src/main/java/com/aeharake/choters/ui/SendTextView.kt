@@ -1,4 +1,4 @@
-package com.aeharake.choters
+package com.aeharake.choters.ui
 
 import android.content.Context
 import android.text.Editable
@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
-import androidx.core.widget.addTextChangedListener
+import com.aeharake.choters.R
 
 class SendTextView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

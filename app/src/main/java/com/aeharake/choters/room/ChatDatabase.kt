@@ -1,20 +1,13 @@
-package com.aeharake.choters.room.entities
+package com.aeharake.choters.room
 
 import android.content.Context
-import android.os.Environment
-import android.os.Handler
-import android.os.HandlerThread
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.aeharake.choters.mocker.UsersGenerator
 import com.aeharake.choters.room.dao.MessageDao
 import com.aeharake.choters.room.dao.UserDao
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import java.io.File
+import com.aeharake.choters.room.entities.Message
+import com.aeharake.choters.room.entities.User
 
 @Database(
     entities = [User::class, Message::class],
@@ -35,7 +28,10 @@ abstract class ChatDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): ChatDatabase {
             instance ?: synchronized(this) {
-                instance ?: buildDatabase(context)
+                instance
+                    ?: buildDatabase(
+                        context
+                    )
                     .let {
                         instance = it
                     }

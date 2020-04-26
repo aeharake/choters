@@ -1,4 +1,4 @@
-package com.aeharake.choters
+package com.aeharake.choters.activities
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -6,9 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aeharake.choters.MainActivity.Companion.USER_ID
-import com.aeharake.choters.MainActivity.Companion.USER_NAME
+import com.aeharake.choters.viewmodels.ConversationViewModel
+import com.aeharake.choters.activities.MainActivity.Companion.USER_ID
+import com.aeharake.choters.activities.MainActivity.Companion.USER_NAME
+import com.aeharake.choters.R
 import com.aeharake.choters.adapters.ConversationAdapter
+import com.aeharake.choters.ui.SendTextView
 
 class ConversationActivity : AppCompatActivity() {
 

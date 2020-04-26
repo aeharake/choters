@@ -1,4 +1,4 @@
-package com.aeharake.choters
+package com.aeharake.choters.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
