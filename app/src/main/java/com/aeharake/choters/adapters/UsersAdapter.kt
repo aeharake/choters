@@ -1,5 +1,6 @@
 package com.aeharake.choters.adapters
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,10 +42,11 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = users!![position]
-        holder.name.text = "${user.firstName} ${user.lastName}"
-        user.message?.let {
-            holder.lastMessage.text = it
-        } ?: kotlin.run {
+        holder.name.text = user.getFullName()
+        if (!TextUtils.isEmpty(user.message)) {
+            holder.lastMessage.text = user.message
+            holder.lastMessage.visibility = View.VISIBLE
+        } else {
             holder.lastMessage.text = ""
             holder.lastMessage.visibility = View.GONE
         }
