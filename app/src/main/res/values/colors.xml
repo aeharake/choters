@@ -5,7 +5,7 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="dark_gray">#737373</color>
     <color name="light_gray">#B1B1B1</color>
-
+    <color name="blue">#2B73FB</color>
     <color name="lighter_gray">#DFDFDF</color>
 
     <color name="recipient_balloon">@color/light_gray</color>
