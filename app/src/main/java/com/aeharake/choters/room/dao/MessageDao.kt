@@ -13,10 +13,10 @@ interface MessageDao {
     @Insert
     fun insert(message: Message)
 
-    @Query("SELECT * FROM message WHERE sender = :user ORDER BY created_on DESC LIMIT 1")
-    fun getLastMessage(user: User) : Message
-
-    @Query("SELECT * FROM message WHERE sender = :user ORDER BY created_on")
-    fun getAllMessages(user: User): LiveData<List<Message>>
+//    @Query("SELECT * FROM message WHERE sender = :user ORDER BY created_on DESC LIMIT 1")
+//    fun getLastMessage(user: User) : Message
+//
+//    @Query("SELECT message FROM message WHERE sender = :user ORDER BY created_on")
+//    fun getAllMessages(user: User): LiveData<List<Message>>
 
 }

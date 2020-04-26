@@ -2,17 +2,23 @@ package com.aeharake.choters.room.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "user")
-data class User(
+@Entity(tableName = "user",
+    indices = [Index(value = ["id"], unique = true)]
+)
+class User {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Int,
+    var id: Int = 0
+
     @ColumnInfo(name = "first_name")
-    val firstName: String,
+    var firstName: String? = null
+
     @ColumnInfo(name = "last_name")
-    val lastName: String,
+    var lastName: String? = null
+
     @ColumnInfo(name = "image")
-    val image: String
-)
+    var image: String? = null
+}

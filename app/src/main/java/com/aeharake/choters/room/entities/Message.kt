@@ -1,17 +1,15 @@
 package com.aeharake.choters.room.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
+import androidx.room.*
 
 @Entity(
-    tableName = "message",
-    foreignKeys = [ForeignKey(
-        entity = User::class,
-        parentColumns = ["id"],
-        childColumns = ["sender", "recipient"]
-    )]
+    tableName = "message"
+//    ,
+//    foreignKeys = [ForeignKey(
+//        entity = User::class,
+//        parentColumns = ["id", "id"],
+//        childColumns = ["sender", "recipient"]
+//    )]
 )
 data class Message(
     @PrimaryKey(autoGenerate = true)

@@ -15,8 +15,12 @@ interface UserDao {
     @Insert
     fun insert(vararg user: User)
 
-    @Query("SELECT u.* FROM user as u INNER JOIN message as m on u.id = m.sender ORDER BY m.created_on DESC")
-    fun getAllUsers() : LiveData<List<User>>
+    @Query("SELECT u.* from user as u")
+//    @Query("SELECT u.* FROM user as u INNER JOIN message as m on u.id = m.sender ORDER BY m.created_on DESC")
+    fun getAllUsersAsync() : LiveData<List<User>>
+
+    @Query("SELECT * FROM user")
+    fun getAllUsers(): List<User>?
 
     @Query("DELETE FROM user")
     fun deleteUsers()
