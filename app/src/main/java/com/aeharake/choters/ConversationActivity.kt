@@ -1,6 +1,7 @@
 package com.aeharake.choters
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,9 @@ class ConversationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         conversationViewModel = ViewModelProvider(this).get(ConversationViewModel::class.java)
         setContentView(R.layout.activity_conversation)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+        }
         initViews()
         intent?.extras?.apply {
             getString(USER_ID)?.let { id ->
@@ -44,6 +48,15 @@ class ConversationActivity : AppCompatActivity() {
     }
 
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home->{
+                onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
     private fun initViews() {
         rv = findViewById(R.id.rv_conversation)
         rv.layoutManager = LinearLayoutManager(this).apply {
