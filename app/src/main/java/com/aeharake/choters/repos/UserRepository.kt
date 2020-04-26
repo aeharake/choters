@@ -6,12 +6,13 @@ import android.os.HandlerThread
 import androidx.lifecycle.LiveData
 import com.aeharake.choters.mocker.UsersGenerator
 import com.aeharake.choters.room.entities.User
+import com.aeharake.choters.room.entities.UserMessage
 
 class UserRepository(application: Application) : ParentRepository(application) {
     private val handlerThread: HandlerThread = HandlerThread("database_populator")
     private val userDao = database.userDao()
 
-    fun getAllUsers(): LiveData<List<User>> {
+    fun getAllUsers(): LiveData<List<UserMessage>> {
         return userDao.getAllUsersAsync()
     }
 

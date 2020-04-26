@@ -7,14 +7,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.aeharake.choters.R
-import com.aeharake.choters.room.entities.User
+import com.aeharake.choters.room.entities.UserMessage
+import com.aeharake.choters.utils.CalendarHelper
+import java.text.SimpleDateFormat
+import java.util.*
 
 class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
 
-    var users: List<User>? = null
+    var userMessages: List<UserMessage>? = null
 
     interface OnUserClickListener {
-        fun onClick(user: User)
+        fun onClick(user: UserMessage)
     }
 
     private var onUserClickListener: OnUserClickListener? = null
@@ -31,7 +34,7 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        users?.let {
+        userMessages?.let {
             return it.size
         } ?: return 0
     }
@@ -41,15 +44,28 @@ class UsersAdapter : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val user = users!![position]
-        holder.name.text = user.getFullName()
-        if (!TextUtils.isEmpty(user.message)) {
-            holder.lastMessage.text = user.message
-            holder.lastMessage.visibility = View.VISIBLE
+        val user = userMessages!![position]
+        holder.name.text = user.user!!.getFullName()
+        if (user.message != null) {
+            if (!TextUtils.isEmpty(user.message!!.message)) {
+                holder.lastMessage.text = user.message!!.message
+                holder.lastMessage.visibility = View.VISIBLE
+                holder.tvTime.text = CalendarHelper.getPrettyTime(user.message!!.createdOn)
+                holder.tvTime.visibility = View.VISIBLE
+            } else {
+                holder.lastMessage.text = ""
+                holder.lastMessage.visibility = View.GONE
+                holder.tvTime.text = ""
+                holder.tvTime.visibility = View.GONE
+            }
+
         } else {
             holder.lastMessage.text = ""
             holder.lastMessage.visibility = View.GONE
+            holder.tvTime.text = ""
+            holder.tvTime.visibility = View.GONE
         }
+
         holder.itemView.setOnClickListener {
             onUserClickListener?.onClick(user)
         }

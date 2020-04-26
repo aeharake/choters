@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aeharake.choters.adapters.UsersAdapter
 import com.aeharake.choters.room.entities.User
+import com.aeharake.choters.room.entities.UserMessage
 
 
 class MainActivity : AppCompatActivity() {
@@ -30,14 +31,14 @@ class MainActivity : AppCompatActivity() {
         usersViewModel.populate()
         usersViewModel.users.observe(this,
             Observer { users ->
-                adapter.users = users
+                adapter.userMessages = users
                 recyclerView.adapter?.notifyDataSetChanged()
             })
         adapter.setOnUserClickListener(object : UsersAdapter.OnUserClickListener {
-            override fun onClick(user: User) {
+            override fun onClick(user: UserMessage) {
                 val intent = Intent(this@MainActivity, ConversationActivity::class.java)
-                intent.putExtra(USER_ID, user.id.toString())
-                intent.putExtra(USER_NAME, user.getFullName())
+                intent.putExtra(USER_ID, user.user!!.id.toString())
+                intent.putExtra(USER_NAME, user.user!!.getFullName())
                 startActivity(intent)
             }
         })
