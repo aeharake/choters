@@ -1,5 +1,6 @@
 package com.aeharake.choters
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +9,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aeharake.choters.adapters.UsersAdapter
+import com.aeharake.choters.room.entities.User
 
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val USER_ID = "user_id"
+        const val USER_NAME = "user_name"
+    }
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var usersViewModel: UsersViewModel
@@ -26,12 +33,23 @@ class MainActivity : AppCompatActivity() {
             Observer { users ->
                 adapter.users = users
                 recyclerView.adapter?.notifyDataSetChanged()
-                Toast.makeText(
-                    this@MainActivity,
-                    "Data changed, new size: ${users?.size}",
-                    Toast.LENGTH_LONG
-                ).show()
+//                Toast.makeText(
+//                    this@MainActivity,
+//                    "Data changed, new size: ${users?.size}",
+//                    Toast.LENGTH_SHORT
+//                ).show()
             })
+
+        adapter.setOnUserClickListener(object : UsersAdapter.OnUserClickListener {
+            override fun onClick(user: User) {
+                val intent = Intent(this@MainActivity, ConversationActivity::class.java)
+                intent.putExtra(USER_ID, user.id.toString())
+                intent.putExtra(USER_NAME, user.getFullName())
+                startActivity(intent)
+//                Toast.makeText(this@MainActivity, "User: ${user.toString()}", Toast.LENGTH_SHORT)
+//                    .show()
+            }
+        })
     }
 
     private fun initViews() {

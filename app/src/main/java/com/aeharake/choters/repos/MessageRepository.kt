@@ -14,6 +14,10 @@ import io.reactivex.schedulers.Schedulers
 class MessageRepository(application: Application) : ParentRepository(application) {
     private var messageDao: MessageDao = database.messageDao()
 
+//    fun getAllMessages(user: User): LiveData<List<Message>> {
+//        return messageDao.getAllMessages(user)
+//    }
+
     fun insertMessage(message: Message) {
         Observable.fromCallable {
             messageDao.insert(message)
