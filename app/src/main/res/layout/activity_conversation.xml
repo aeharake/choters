@@ -7,7 +7,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_conversation"
-        android:layout_width="match_parent"
+        tools:listitem="@layout/item_message_friend"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/stv"
         app:layout_constraintLeft_toLeftOf="parent"
