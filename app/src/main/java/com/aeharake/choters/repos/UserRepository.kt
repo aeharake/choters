@@ -12,7 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 
-class UserRepository(private val application: Application) : ParentRepository(application) {
+class UserRepository(application: Application) : ParentRepository(application) {
     private val handlerThread: HandlerThread = HandlerThread("database_populator")
 
     fun insertUsers(vararg user: User) {
@@ -53,13 +53,14 @@ class UserRepository(private val application: Application) : ParentRepository(ap
                 if (size == 0) {
                     UsersGenerator.getRandomFullNames()
                         .map {
-                            User().apply {
-                                firstName = it.firstName
-                                lastName = it.lastName
-                            }
-                        }.toTypedArray()
-                        .let { users ->
-                            database.userDao().insert(*users)
+                            User(it.firstName, it.lastName)
+                        }.
+//                        .forEach {
+//                            user->
+//                            database.userDao().insert(user)
+//                        }
+                        let { users ->
+                            database.userDao().insert(users)
                         }
                 }
 
