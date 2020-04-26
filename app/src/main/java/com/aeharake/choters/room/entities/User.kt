@@ -1,7 +1,6 @@
 package com.aeharake.choters.room.entities
 
 import androidx.room.*
-
 @Entity(
     tableName = "user"
 )
@@ -20,7 +19,6 @@ data class User(
     @ColumnInfo(name = "image")
     var image: String? = null
 
-    @Ignore
     var message: String? = null
 
     fun getFullName(): String {

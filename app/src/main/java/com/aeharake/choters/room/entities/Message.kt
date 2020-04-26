@@ -3,8 +3,14 @@ package com.aeharake.choters.room.entities
 import androidx.room.*
 
 @Entity(
-    tableName = "message"
-    ,
+    tableName = "message",
+    indices = [Index(
+        value = ["sender"],
+        unique = false
+    ),Index(
+        value = ["recipient"],
+        unique = false
+    )],
     foreignKeys = [
         ForeignKey(
             entity = User::class,
@@ -19,15 +25,21 @@ import androidx.room.*
     ]
 )
 data class Message(
+    @ColumnInfo(name = "message")
+    var message: String,
+    @ColumnInfo(name = "sender")
+    var sender: Int? = null,
+    @ColumnInfo(name = "recipient")
+    var recipient: Int? = null
+
+    ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Int,
-    @ColumnInfo(name = "message")
-    val message: String,
-    @ColumnInfo(name = "sender")
-    val sender: Int,
-    @ColumnInfo(name = "recipient")
-    val recipient: Int,
+    var id: Int = 0
+
+    @ColumnInfo(name = "status")
+    var status: Int? = null //will not use this now because we don't have interaction with a server.
+
     @ColumnInfo(name = "created_on")
-    val createdOn: String
-)
+    var createdOn: String = System.currentTimeMillis().toString()
+}

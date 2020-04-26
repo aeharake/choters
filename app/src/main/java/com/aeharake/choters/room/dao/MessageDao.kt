@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import com.aeharake.choters.room.entities.Message
-import com.aeharake.choters.room.entities.User
 
 @Dao
 interface MessageDao {
@@ -13,10 +12,10 @@ interface MessageDao {
     @Insert
     fun insert(message: Message)
 
-//    @Query("SELECT * FROM message WHERE sender = :user ORDER BY created_on DESC LIMIT 1")
-//    fun getLastMessage(user: User) : Message
+    @Query("SELECT * FROM message WHERE (sender = :id AND recipient is null) OR (sender is null AND recipient = :id) ORDER BY created_on")
+    fun getAllMessagesAsync(id: Int): LiveData<List<Message>>
 
-//    @Query("SELECT * FROM message WHERE sender = :user ORDER BY created_on")
-//    fun getAllMessages(user: User): LiveData<List<Message>>
+    @Query("SELECT * FROM message where sender != :id")
+    fun getAllMessages(id: Int): List<Message>
 
 }

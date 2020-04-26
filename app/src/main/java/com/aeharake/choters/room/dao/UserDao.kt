@@ -14,15 +14,9 @@ interface UserDao {
     fun insert(user: User)
 
     @Insert
-    fun insert(vararg user: User)
-
-    @Insert
     fun insert(user: List<User>)
 
-
-    //UNION ALL SELECT u.* from user as u  JOIN message as m on u.id = m.sender
-//    @Query("SELECT u.* from user as u")
-    @Query("SELECT u.*,m.message FROM user as u LEFT JOIN message as m on u.id = m.sender  ORDER BY m.created_on DESC")
+    @Query("SELECT u.*,m.message FROM user as u LEFT JOIN message as m on u.id = m.sender group by u.id ORDER BY max(m.created_on) DESC")
     fun getAllUsersAsync() : LiveData<List<User>>
 
     @Query("SELECT * FROM user")
