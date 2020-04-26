@@ -2,7 +2,6 @@ package com.aeharake.choters
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -33,21 +32,13 @@ class MainActivity : AppCompatActivity() {
             Observer { users ->
                 adapter.users = users
                 recyclerView.adapter?.notifyDataSetChanged()
-//                Toast.makeText(
-//                    this@MainActivity,
-//                    "Data changed, new size: ${users?.size}",
-//                    Toast.LENGTH_SHORT
-//                ).show()
             })
-
         adapter.setOnUserClickListener(object : UsersAdapter.OnUserClickListener {
             override fun onClick(user: User) {
                 val intent = Intent(this@MainActivity, ConversationActivity::class.java)
                 intent.putExtra(USER_ID, user.id.toString())
                 intent.putExtra(USER_NAME, user.getFullName())
                 startActivity(intent)
-//                Toast.makeText(this@MainActivity, "User: ${user.toString()}", Toast.LENGTH_SHORT)
-//                    .show()
             }
         })
     }
