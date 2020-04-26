@@ -4,23 +4,33 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.aeharake.choters.room.dao.MessageDao
 import com.aeharake.choters.room.entities.Message
-import com.aeharake.choters.room.entities.User
 import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import timber.log.Timber
+import kotlin.random.Random
 
 class MessageRepository(application: Application) : ParentRepository(application) {
     private var messageDao: MessageDao = database.messageDao()
 
-//    fun getAllMessages(user: User): LiveData<List<Message>> {
-//        return messageDao.getAllMessages(user)
-//    }
+    fun getAllMessages(id: Int): LiveData<List<Message>> {
+        return messageDao.getAllMessagesAsync(id)
+    }
 
-    fun insertMessage(message: Message) {
+    fun insertMessageAndEcho(text: String, id: Int) {
+        //we don't pass them inside a data object becausee we want 2 different objects that we will construct in background
+
         Observable.fromCallable {
-            messageDao.insert(message)
+            val original = Message(text, null, id)
+            messageDao.insert(original)
+            //there should be here a 0.5 second interval
+            val random: Double = Random.nextInt(1, 6) / 10.0;
+            Timber.v("Random value generated: $random")
+            Thread.sleep((random * 1000).toLong())
+            val echoed = Message(original.message, id, null)
+            messageDao.insert(echoed)
             true
         }.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
@@ -40,21 +50,4 @@ class MessageRepository(application: Application) : ParentRepository(application
 
             })
     }
-
-//    fun getLastMessage(user: User): Message {
-//        return Observable.fromCallable {
-//            return@fromCallable messageDao.getLastMessage(user)
-//        }.observeOn(AndroidSchedulers.mainThread())
-//            .subscribeOn(Schedulers.io())
-//            .blockingFirst()
-//    }
-//
-//    fun getAllMessages(user: User): LiveData<List<Message>> {
-//        return messageDao.getAllMessages(user)
-////        return Observable.fromCallable {
-////            return@fromCallable messageDao.getAllMessages(user)
-////        }.observeOn(AndroidSchedulers.mainThread())
-////            .subscribeOn(Schedulers.io())
-////            .blockingFirst()
-//    }
 }

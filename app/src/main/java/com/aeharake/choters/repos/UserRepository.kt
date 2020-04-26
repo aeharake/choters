@@ -14,33 +14,10 @@ import io.reactivex.schedulers.Schedulers
 
 class UserRepository(application: Application) : ParentRepository(application) {
     private val handlerThread: HandlerThread = HandlerThread("database_populator")
-
-    fun insertUsers(vararg user: User) {
-        Observable.fromCallable<Boolean> {
-            database.userDao().insert(*user)
-            true
-        }.subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<Boolean> {
-                override fun onComplete() {
-
-                }
-
-                override fun onSubscribe(d: Disposable) {
-                }
-
-                override fun onNext(t: Boolean) {
-
-                }
-
-                override fun onError(e: Throwable) {
-                }
-
-            })
-    }
+    private val userDao = database.userDao()
 
     fun getAllUsers(): LiveData<List<User>> {
-        return database.userDao().getAllUsersAsync()
+        return userDao.getAllUsersAsync()
     }
 
     fun populate() {
@@ -54,13 +31,9 @@ class UserRepository(application: Application) : ParentRepository(application) {
                     UsersGenerator.getRandomFullNames()
                         .map {
                             User(it.firstName, it.lastName)
-                        }.
-//                        .forEach {
-//                            user->
-//                            database.userDao().insert(user)
-//                        }
-                        let { users ->
-                            database.userDao().insert(users)
+                        }
+                        .let { users ->
+                            userDao.insert(users)
                         }
                 }
 

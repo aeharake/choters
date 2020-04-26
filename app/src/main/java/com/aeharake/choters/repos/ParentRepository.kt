@@ -5,6 +5,6 @@ import com.aeharake.choters.room.entities.ChatDatabase
 
 open class ParentRepository(application: Application) {
 
-    var database: ChatDatabase = ChatDatabase.getInstance(application)
+    protected var database: ChatDatabase = ChatDatabase.getInstance(application)
 
 }
