@@ -14,12 +14,12 @@ import androidx.room.*
     foreignKeys = [
         ForeignKey(
             entity = User::class,
-            parentColumns = ["id"],
+            parentColumns = ["user_id"],
             childColumns = ["sender"]
         ),
         ForeignKey(
             entity = User::class,
-            parentColumns = ["id"],
+            parentColumns = ["user_id"],
             childColumns = ["recipient"]
         )
     ]
@@ -34,7 +34,7 @@ data class Message(
 
     ) {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "message_id")
     var id: Int = 0
 
     @ColumnInfo(name = "status")

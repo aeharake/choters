@@ -12,20 +12,17 @@ data class User(
     var lastName: String
 
 ) {
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "user_id")
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 
     @ColumnInfo(name = "image")
     var image: String? = null
 
-    var message: String? = null
+//    var message: String? = null
 
     fun getFullName(): String {
         return "$firstName $lastName"
     }
 
-    override fun toString(): String {
-        return "ID:$id , Fullname:$firstName $lastName , lastMessage:$message"
-    }
 }
