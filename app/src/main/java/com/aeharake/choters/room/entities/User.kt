@@ -1,24 +1,33 @@
 package com.aeharake.choters.room.entities
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
-import androidx.room.PrimaryKey
+import androidx.room.*
 
-@Entity(tableName = "user",
-    indices = [Index(value = ["id"], unique = true)]
+@Entity(
+    tableName = "user"
 )
-class User {
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var id: Int = 0
-
+data class User(
     @ColumnInfo(name = "first_name")
-    var firstName: String? = null
+    val firstName: String,
 
     @ColumnInfo(name = "last_name")
-    var lastName: String? = null
+    var lastName: String
+
+) {
+    @ColumnInfo(name = "id")
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
 
     @ColumnInfo(name = "image")
     var image: String? = null
+
+    @Ignore
+    var message: String? = null
+
+    fun getFullName(): String {
+        return "$firstName $lastName"
+    }
+
+    override fun toString(): String {
+        return "ID:$id , Fullname:$firstName $lastName , lastMessage:$message"
+    }
 }

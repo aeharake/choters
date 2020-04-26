@@ -4,12 +4,19 @@ import androidx.room.*
 
 @Entity(
     tableName = "message"
-//    ,
-//    foreignKeys = [ForeignKey(
-//        entity = User::class,
-//        parentColumns = ["id", "id"],
-//        childColumns = ["sender", "recipient"]
-//    )]
+    ,
+    foreignKeys = [
+        ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["sender"]
+        ),
+        ForeignKey(
+            entity = User::class,
+            parentColumns = ["id"],
+            childColumns = ["recipient"]
+        )
+    ]
 )
 data class Message(
     @PrimaryKey(autoGenerate = true)
