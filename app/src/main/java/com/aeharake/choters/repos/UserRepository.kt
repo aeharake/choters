@@ -6,11 +6,6 @@ import android.os.HandlerThread
 import androidx.lifecycle.LiveData
 import com.aeharake.choters.mocker.UsersGenerator
 import com.aeharake.choters.room.entities.User
-import io.reactivex.Observable
-import io.reactivex.Observer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class UserRepository(application: Application) : ParentRepository(application) {
     private val handlerThread: HandlerThread = HandlerThread("database_populator")
@@ -23,10 +18,7 @@ class UserRepository(application: Application) : ParentRepository(application) {
     fun populate() {
         handlerThread.start().apply {
             Handler(handlerThread.looper).post {
-                var size = database.userDao().getAllUsers()?.size
-                if (size == null) {
-                    size = 0
-                }
+                val size = database.userDao().getUsersCount()
                 if (size == 0) {
                     UsersGenerator.getRandomFullNames()
                         .map {

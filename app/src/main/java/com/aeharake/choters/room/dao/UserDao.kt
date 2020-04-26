@@ -19,8 +19,8 @@ interface UserDao {
     @Query("SELECT u.*,m.message FROM user as u LEFT JOIN message as m on u.id = m.sender group by u.id ORDER BY max(m.created_on) DESC")
     fun getAllUsersAsync() : LiveData<List<User>>
 
-    @Query("SELECT * FROM user")
-    fun getAllUsers(): List<User>?
+    @Query("SELECT count(*) FROM user")
+    fun getUsersCount(): Int
 
     @Query("DELETE FROM user")
     fun deleteUsers()
