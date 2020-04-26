@@ -14,7 +14,7 @@ class SendTextView @JvmOverloads constructor(
     private var btnSend: ImageView
 
     interface OnSendClickListener{
-        fun onSend(text: String)
+        fun onSendClick(text: String)
     }
     private var onSendClickListener: OnSendClickListener? = null
     init {
@@ -22,7 +22,7 @@ class SendTextView @JvmOverloads constructor(
         etText = findViewById(R.id.et_text)
         btnSend = findViewById(R.id.btn_send)
         btnSend.setOnClickListener {
-            onSendClickListener?.onSend(getText())
+            onSendClickListener?.onSendClick(getText())
             clearText()
         }
     }
