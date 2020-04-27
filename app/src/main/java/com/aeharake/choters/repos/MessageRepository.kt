@@ -4,10 +4,9 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import com.aeharake.choters.room.dao.MessageDao
 import com.aeharake.choters.room.entities.Message
+import com.aeharake.choters.utils.CodeUtils
 import io.reactivex.Observable
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import kotlin.random.Random
@@ -34,20 +33,6 @@ class MessageRepository(application: Application) : ParentRepository(application
             true
         }.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe(object : Observer<Boolean> {
-                override fun onComplete() {
-
-                }
-
-                override fun onSubscribe(d: Disposable) {
-                }
-
-                override fun onNext(t: Boolean) {
-                }
-
-                override fun onError(e: Throwable) {
-                }
-
-            })
+            .subscribe(CodeUtils.emptySubscriber())
     }
 }
