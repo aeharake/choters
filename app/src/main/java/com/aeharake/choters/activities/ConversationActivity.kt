@@ -76,7 +76,7 @@ class ConversationActivity : AppCompatActivity() {
         sendTextView = findViewById(R.id.stv)
         sendTextView.setOnSendClickListener(object : SendTextView.OnSendClickListener {
             override fun onSendClick(text: String) {
-                conversationViewModel.insertAndEcho(text, userId!!) // it's ok to ignore the null warning here, because i'm throwing an exception above if userId is not specified by developer. So userid will always be there.
+                conversationViewModel.insertAndEcho(text.trim(), userId!!) // it's ok to ignore the null warning here, because i'm throwing an exception above if userId is not specified by developer. So userid will always be there.
             }
         })
         sendTextView.setFocused()
