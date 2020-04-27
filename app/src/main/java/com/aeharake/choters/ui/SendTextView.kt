@@ -1,6 +1,7 @@
 package com.aeharake.choters.ui
 
 import android.content.Context
+import android.graphics.Rect
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
@@ -48,6 +49,9 @@ class SendTextView @JvmOverloads constructor(
         btnSend.isEnabled = false
     }
 
+    fun setFocused(){
+        etText.requestFocus()
+    }
 
     private fun clearText() {
         etText.setText("")

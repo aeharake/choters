@@ -79,5 +79,6 @@ class ConversationActivity : AppCompatActivity() {
                 conversationViewModel.insertAndEcho(text, userId!!) // it's ok to ignore the null warning here, because i'm throwing an exception above if userId is not specified by developer. So userid will always be there.
             }
         })
+        sendTextView.setFocused()
     }
 }
