@@ -2,4 +2,5 @@
 <resources>
     <dimen name="item_row_contact_image_size">50dp</dimen>
     <dimen name="radius_balloon_conversation">4dp</dimen>
+    <item name="max_width_item_message" type="dimen" format="float">0.9</item>
 </resources>

@@ -5,15 +5,19 @@ import android.os.Handler
 import android.os.HandlerThread
 import androidx.lifecycle.LiveData
 import com.aeharake.choters.mocker.UsersGenerator
+import com.aeharake.choters.room.dao.UserDao
 import com.aeharake.choters.room.entities.User
 import com.aeharake.choters.room.entities.UserMessage
 
-class UserRepository(application: Application) : ParentRepository(application) {
+class UserRepository(application: Application) : BaseRepository<UserDao>(application) {
     private val handlerThread: HandlerThread = HandlerThread("database_populator")
-    private val userDao = database.userDao()
 
     fun getAllUsers(): LiveData<List<UserMessage>> {
-        return userDao.getAllUsersAsync()
+        return dao.getAllUsersAsync()
+    }
+
+    override fun createDao() : UserDao {
+        return database.userDao()
     }
 
     fun populate() {
@@ -26,11 +30,12 @@ class UserRepository(application: Application) : ParentRepository(application) {
                             User(it.firstName, it.lastName)
                         }
                         .let { users ->
-                            userDao.insert(users)
+                            dao.insert(users)
                         }
                 }
 
             }
         }
     }
+
 }

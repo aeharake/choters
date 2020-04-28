@@ -9,7 +9,7 @@ import com.aeharake.choters.room.entities.User
 import com.aeharake.choters.room.entities.UserMessage
 
 @Dao
-interface UserDao {
+interface UserDao : BaseDao{
 
     @Insert
     fun insert(user: User)

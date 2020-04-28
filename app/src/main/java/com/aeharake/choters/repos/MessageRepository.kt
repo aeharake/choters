@@ -11,11 +11,15 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import kotlin.random.Random
 
-class MessageRepository(application: Application) : ParentRepository(application) {
-    private var messageDao: MessageDao = database.messageDao()
+class MessageRepository(application: Application) : BaseRepository<MessageDao>(application) {
 
     fun getAllMessages(id: Int): LiveData<List<Message>> {
-        return messageDao.getAllMessagesAsync(id)
+        return dao.getAllMessagesAsync(id)
+    }
+
+
+    override fun createDao() : MessageDao {
+        return database.messageDao()
     }
 
     fun insertMessageAndEcho(text: String, id: Int) {
@@ -23,16 +27,17 @@ class MessageRepository(application: Application) : ParentRepository(application
 
         Observable.fromCallable {
             val original = Message(text, null, id)
-            messageDao.insert(original)
+            dao.insert(original)
             //there should be here a 0.5 second interval
             val random: Double = Random.nextInt(1, 6) / 10.0;
             Timber.v("Random value generated: $random")
             Thread.sleep((random * 1000).toLong())
             val echoed = Message(original.message, id, null)
-            messageDao.insert(echoed)
+            dao.insert(echoed)
             true
         }.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe(CodeUtils.emptySubscriber())
     }
+
 }

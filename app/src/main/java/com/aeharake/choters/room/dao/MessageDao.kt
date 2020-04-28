@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.aeharake.choters.room.entities.Message
 
 @Dao
-interface MessageDao {
+interface MessageDao : BaseDao{
 
     @Insert
     fun insert(message: Message)
