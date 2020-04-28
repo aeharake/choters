@@ -8,7 +8,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.aeharake.choters"
+        applicationId "github.aeharake.choters"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
