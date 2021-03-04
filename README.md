@@ -1,6 +1,6 @@
 # Sample Chat Application
 
-### **Objective: **
+### Objective:
 Implementing a chat application that will populate at startup 200 users in the database and echo back any message sent after a delay of about 500ms.
 
 **github.aeharake.choters**
